@@ -2,7 +2,6 @@
 layout: default
 refactor: true
 ---
-
 {% include lang.html %}
 
 {% assign pinned = site.posts | where: 'pin', 'true' %}
@@ -25,89 +24,171 @@ refactor: true
 
 <!-- Get default posts -->
 
-{% assign default_beg = offset | minus: pinned.size %}
-
-{% if default_beg < 0 %}
-  {% assign default_beg = 0 %}
-{% endif %}
-
-{% assign default_num = paginator.posts | size | minus: pinned_num %}
-{% assign default_end = default_beg | plus: default_num | minus: 1 %}
-
-{% if default_num > 0 %}
-  {% for i in (default_beg..default_end) %}
-    {% assign posts = posts | push: default[i] %}
-  {% endfor %}
-{% endif %}
-
-<div id="post-list" class="flex-grow-1 px-xl-1">
-  {% for post in posts %}
-    <article class="card-wrapper card">
-      <a href="{{ post.url | relative_url }}" class="post-preview row g-0 flex-md-row-reverse">
-        {% assign card_body_col = '12' %}
-
-        {% if post.image %}
-          {% assign src = post.image.path | default: post.image %}
-          {% unless src contains '//' %}
-            {% assign src = post.media_subpath | append: '/' | append: src | replace: '//', '/' %}
-          {% endunless %}
-
-          {% assign alt = post.image.alt | xml_escape | default: 'Preview Image' %}
-
-          {% assign lqip = null %}
-
-          {% if post.image.lqip %}
-            {% capture lqip %}lqip="{{ post.image.lqip }}"{% endcapture %}
-          {% endif %}
-
-          <div class="col-md-5">
-            <img src="{{ src }}" alt="{{ alt }}" {{ lqip }}>
-          </div>
-
-          {% assign card_body_col = '7' %}
-        {% endif %}
-
-        <div class="col-md-{{ card_body_col }}">
-          <div class="card-body d-flex flex-column">
-            <h1 class="card-title my-2 mt-md-0">{{ post.title }}</h1>
-
-            <div class="card-text content mt-0 mb-3">
-              <p>{% include post-description.html %}</p>
-            </div>
-
-            <div class="post-meta flex-grow-1 d-flex align-items-end">
-              <div class="me-auto">
-                <!-- posted date -->
-                <i class="far fa-calendar fa-fw me-1"></i>
-                {% include datetime.html date=post.date lang=lang %}
-
-                <!-- categories -->
-                {% if post.categories.size > 0 %}
-                  <i class="far fa-folder-open fa-fw me-1"></i>
-                  <span class="categories">
-                    {% for category in post.categories %}
-                      {{ category }}
-                      {%- unless forloop.last -%},{%- endunless -%}
-                    {% endfor %}
-                  </span>
-                {% endif %}
-              </div>
-
-              {% if post.pin %}
-                <div class="pin ms-1">
-                  <i class="fas fa-thumbtack fa-fw"></i>
-                  <span>{{ site.data.locales[lang].post.pin_prompt }}</span>
-                </div>
-              {% endif %}
-            </div>
-            <!-- .post-meta -->
-          </div>
-          <!-- .card-body -->
-        </div>
-      </a>
-    </article>
-  {% endfor %}
+<h1>Publications</h1>
+<hr>
+<div class="publication">
+  <div class="publication-content">
+    <div class="publication-title">
+      Semiautonmous Precision Pruning Of Upright Fruiting Offshoot Orchard Systems
+    </div>
+    
+    <div class="publication-authors">
+      Alexander You, Nidhi Parayil, <strong>Josyula Gopala Krishna</strong>, Uddhav Bhattarai, Ranjan Sapkota, Dawood Ahmed, Matthew Whiting, Manoj Karkee, Cindy M. Grimm, and Joseph R. Davidson
+    </div>
+    
+    <div class="publication-details">
+      Presented at <em>ICRA 2024</em>
+    </div>
+    
+    <div class="publication-description">
+      Our paper on Robotic Pruning has been published in IEEE RAM special issue on Agricultural Robotics and has been accepted for presentation at ICRA 2024!
+    </div>
+    
+    <div class="publication-links">
+      <a href="https://ieeexplore.ieee.org/document/10246299">Paper</a>
+      <!-- Uncomment below if you have a paper link -->
+      <a href="https://youtu.be/AQxMjCgiHfI?t=74">Video</a>
+    </div>
+  </div>
 </div>
+
+<div class="publication">
+  <div class="publication-content">
+    <div class="publication-title">
+      Probabilistic Collision Avoidance For Multiple Robots: A Closed Form PDF Approach
+    </div>
+    
+    <div class="publication-authors">
+      <strong>Josyula Gopala Krishna</strong>, Anirudha Ramesh, K Madhava Krishna
+    </div>
+    
+    <div class="publication-details">
+      Presented at <em>Intelligent Vehicles Symposium 2021</em>
+    </div>
+    
+    <div class="publication-description">
+      Intent based collision avoidance for autonomous vehicles with collision avoidance guarantees for a specied confidence interval. Applicable for unstructured environments and various on road scenarios.  
+    </div>
+    
+    <div class="publication-links">
+      <!-- <a href="https://docs.google.com/presentation/d/18Fg3G3-C0pzFChpTumYyRdYhzVsVeW96/edit#slide=id.p1">Report</a> -->
+      <!-- Uncomment below if you have a paper link -->
+      <a href="https://ieeexplore.ieee.org/document/9575767">Paper</a>
+    </div>
+  </div>
+</div>
+
+<h1>Projects</h1>
+<hr>
+
+<div class="publication">
+  <img src="assets/img/projects/colfreespace.png" alt="multirobot collision avoidance">
+  <div class="publication-content">
+    <div class="publication-title">Distributed Collision Avoidance For Multiple Robots</div>
+    <div class="publication-details">
+      Multirobot collision avoidance with ORCA constraints for drones and holonomic ground vehicles
+    </div>
+    <div class="publication-links">
+      <a href="https://github.com/josyulakrishna/multiagent_collision_avoidance_holonomic">Code</a>
+      <a href="https://github.com/josyulakrishna/multiagent_collision_avoidance_holonomic/blob/master/demo/50agents.gif"
+        >Video</a
+      >
+    </div>
+    <div class="publication-description">A project for Collins Aeorospace with code in Matlab</div>
+  </div>
+</div>
+
+<div class="publication">
+  <img src="assets/img/projects/colfreespace.png" alt="Algorithm">
+  <div class="publication-content">
+    <div class="publication-title">Multirobot Payload Transport</div>
+
+    <div class="publication-details">
+      Demonstrated multirobot payload transport with centralized and decentralized reinforcement learning approaches to
+      transport a rigid object
+    </div>
+    <div class="publication-links">
+      <a href="https://github.com/josyulakrishna/multiRobotCarry">Code</a>
+      <a href="https://josyulakrishna.github.io/assets/pdf/MASfinalpaper.pdf"> Paper</a>
+    </div>
+    <div class="publication-description">
+      Designed the simulation environment in PyBullet and to work with gym enviroments and experimented with MADDPG,
+      PPO, MAPPO and Neurocoevolutionary methods for multirobot payload transport
+    </div>
+  </div>
+</div>
+
+<div class="publication">
+  <img src="assets/img/projects/colfreespace.png" alt="Algorithm">
+  <div class="publication-content">
+    <div class="publication-title">MultiAgent Collision Avoidance With Scaling On Complex Trajectories</div>
+
+    <div class="publication-details">
+      Non-holonomic collision avoidance for multiple agents with scaling on complex trajectories
+    </div>
+    <div class="publication-links">
+      <a href="https://github.com/josyulakrishna/multiagent_collision_avoidance_scaling">Code</a>
+      {% comment %} <a href="https://josyulakrishna.github.io/assets/pdf/MASfinalpaper.pdf" > Paper</a> {% endcomment %}
+    </div>
+    <div class="publication-description">
+      Collision avoidance for autonomous robots in complex ustructured trajectories with non-linear time scaling on
+      collision cone enabling collision avoidance
+    </div>
+  </div>
+</div>
+
+<div class="publication">
+  <img src="assets/img/projects/colfreespace.png" alt="Algorithm">
+  <div class="publication-content">
+    <div class="publication-title">Precision Orchard Management Mapping a Orchard</div>
+
+    <div class="publication-details">
+      Created a 3D map of an orchard using a UR5 robotic arm with a Intel Realsense depth camera
+    </div>
+    <div class="publication-links">
+      <a href="https://docs.google.com/presentation/d/18Fg3G3-C0pzFChpTumYyRdYhzVsVeW96/edit#slide=id.p1">Report</a>
+      {% comment %} <a href="https://josyulakrishna.github.io/assets/pdf/MASfinalpaper.pdf" > Paper</a> {% endcomment %}
+    </div>
+    <div class="publication-description">
+      A branch segementation and mapping project with RTAB mapping and Hollistic Nested Edge Detection
+    </div>
+  </div>
+</div>
+<div class="publication">
+  <img src="assets/img/projects/colfreespace.png" alt="Algorithm">
+  <div class="publication-content">
+    <div class="publication-title">Responsibility Sensitive & Safety For Autonomous Vehicles</div>
+
+    <div class="publication-details">
+      Re-formulated RSS constraints under estimation uncertainty, demonstrated collision avoidance under uncertainty, project for Intel India    </div>
+    <div class="publication-links">
+      <a href="https://docs.google.com/presentation/d/1X8Ii1XTuUo9i7_HuwCRVGjfEPj2XcRqB8s-A30qTCYQ/edit?usp=sharing">Report</a>
+    </div>
+    <div class="publication-description">
+      Exhaustive analysis of RSS constraints under uncertainty and demonstrated collision avoidance under uncertainty with RSS constraints for autonomous vehicles
+    </div>
+  </div>
+
+</div>
+
+<div class="publication">
+  <img src="assets/img/projects/colfreespace.png" alt="Algorithm">
+  <div class="publication-content">
+    <div class="publication-title">Frenet-Frame Planning for Autonomous Vehicles in CARLA Simulator
+  </div>
+
+    <div class="publication-details">
+      Frenet-Frame based planning with lane-change, merging and intersection management    
+      <div class="publication-links">
+      <a href="https://github.com/josyulakrishna/carlaFrenetFrames">Videos and Code</a>
+    </div>
+    <div class="publication-description">
+      Implemented Frenet-Frame based planning for autonomous vehicles in CARLA simulator with lane-change, merging and intersection management with PID controllers
+    </div>
+  </div>
+
+</div>
+
 <!-- #post-list -->
 
 {% if paginator.total_pages > 1 %}
